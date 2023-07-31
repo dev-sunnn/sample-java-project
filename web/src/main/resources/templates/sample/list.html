@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="sample/head :: head_fragment(title = 'サンプル情報一覧', scripts = ~{::script}, links = ~{::link})"></head>
+
+<body>
+  <div class="container">
+    <h1>サンプル情報一覧</h1>
+    <div class="float-end">
+      <a th:href="@{/sample/add}" class="btn btn-primary">新規登録</a>
+    </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>名前</th>
+          <th>更新日時</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="sample : ${samplelist}" th:object="${sample}" class="align-middle">
+          <td th:text="*{id}"></td>
+          <td th:text="*{name}"></td>
+          <td th:text="${#dates.format(sample.updateDate, 'yyyy/MM/dd')}"></td>
+          <td><a th:href="@{/sample/{id}(id=*{id})}" class="btn btn-secondary">詳細</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+
+</html>

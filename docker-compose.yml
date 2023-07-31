@@ -1,0 +1,28 @@
+services:
+  frontend:
+    container_name: sample-java-app
+    build: ./web/image/
+    tty: true
+    ports:
+      - 8080:8080
+    volumes:
+      - ./web:/web
+    working_dir: /web
+    depends_on:
+      - backend
+
+  backend:
+    container_name: sample-java-db
+    build: ./db/image/
+    ports:
+      - 5432:5432
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./db/init:/docker-entrypoint-initdb.d
+    environment:
+      POSTGRES_DB: sample_postgres_db
+      POSTGRES_USER: postgres_user
+      POSTGRES_PASSWORD: postgres_pass
+
+volumes:
+  db-data:

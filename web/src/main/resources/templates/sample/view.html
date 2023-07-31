@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="sample/head :: head_fragment(title = 'サンプル情報詳細', scripts = ~{::script}, links = ~{::link})"></head>
+
+<body>
+    <div class="container">
+        <h1>サンプル情報詳細</h1>
+        <div th:object="${sampledata}">
+            <div class="row mx-md-n5">
+                <div class="col-2 pt-3 border bg-light">ID</div>
+                <div class="col pt-3 border">
+                    <p th:text="*{id}"></p>
+                </div>
+            </div>
+            <div class="row mx-md-n5">
+                <div class="col-2 pt-3 border bg-light">名前</div>
+                <div class="col pt-3 border">
+                    <p th:text="*{name}"></p>
+                </div>
+            </div>
+            <div class="row mx-md-n5">
+                <div class="col-2 pt-3 border bg-light">パス</div>
+                <div class="col pt-3 border">
+                    <p th:text="*{path}"></p>
+                </div>
+            </div>
+        </div>
+        <div class="row mx-md-n5">
+            <div class="col-2 pt-3 border bg-light">作成日時</div>
+            <div class="col pt-3 border">
+                <p th:text="${#dates.format(sampledata.updateDate, 'yyyy/MM/dd')}"></p>
+            </div>
+        </div>
+        <div class="row mx-md-n5">
+            <div class="col-2 pt-3 border bg-light">更新日時</div>
+            <div class="col pt-3 border">
+                <p th:text="${#dates.format(sampledata.createDate, 'yyyy/MM/dd')}"></p>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="text-center">
+        <a th:href="@{/sample/{id}/edit(id=*{id})}" class="btn btn-primary" aria-disabled="true">　編集　</a>
+        <a th:href="@{/sample/{id}/delete(id=*{id})}" class="btn btn-secondary" aria-disabled="true">　削除　</a>
+        <a href="/sample/list" class="btn btn-secondary">一覧に戻る</a>
+    </div>
+    </div>
+</body>
+
+</html>
